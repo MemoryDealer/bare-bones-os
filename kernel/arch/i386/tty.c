@@ -14,7 +14,7 @@ void terminal_initialize(void)
 {
 	terminal_row = 0;
 	terminal_column = 0;
-	terminal_color = make_color(COLOR_LIGHT_GREY, COLOR_BLACK);
+	terminal_color = make_color(COLOR_GREEN, COLOR_BLACK);
 	terminal_buffer = VGA_MEMORY;
 	for ( size_t y = 0; y < VGA_HEIGHT; y++ )
 	{
@@ -39,6 +39,12 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y)
 
 void terminal_putchar(char c)
 {
+	if(c == '\n'){
+		terminal_column = 0;
+		++terminal_row;
+		return;
+	}
+
 	terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
 	if ( ++terminal_column == VGA_WIDTH )
 	{
@@ -52,8 +58,9 @@ void terminal_putchar(char c)
 
 void terminal_write(const char* data, size_t size)
 {
-	for ( size_t i = 0; i < size; i++ )
+	for ( size_t i = 0; i < size; i++ ){
 		terminal_putchar(data[i]);
+	}
 }
 
 void terminal_writestring(const char* data)
