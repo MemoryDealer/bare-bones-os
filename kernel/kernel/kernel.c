@@ -13,5 +13,10 @@ void kernel_early(void)
 void kernel_main(void)
 {
 	printf("Hello there, kernel World!\n");
-	printf("Welcome.\n\nThis is a newline.\n");
+	printf("Welcome.\n\nThis is a newline.\n\n");
+	
+	int i = 0;
+	while(i < 30){
+		printf("Doing some operation...\n");
+	}
 }
